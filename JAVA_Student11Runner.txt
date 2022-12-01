@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Student11 implements Comparable<Student11>{
+    private String name;
+    private int rollNo;
+    private int []marks;
+
+    public Student11()
+    {
+    }
+    public Student11(String name, int rollNo, int[] marks) {
+        this.name = name;
+        this.rollNo = rollNo;
+        this.marks = marks;
+    }
+
+    public int[] getMarks() {
+        return marks;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public int TotalMarks() {
+        int total=0;
+        for(int i=0; i<marks.length;i++)
+        {
+            total=total+ marks[i];
+
+        }
+        return total;
+    }
+    @Override
+    public String toString() {
+        return "{" +
+                "Name='" + name + '\'' +
+                ", RollNo=" + rollNo +
+                ", Marks=" + Arrays.toString(marks) +
+                '}';
+    }
+    public static Comparator<Student11> comparator1= new Comparator<Student11>() {
+        @Override
+        public int compare(Student11 o1, Student11 o2) {
+            return o1.name.compareTo(o2.name);
+
+        }
+    };
+
+
+    @Override
+    public int compareTo(Student11 that) {
+        return Integer.compare(this.rollNo,that.rollNo);
+    }
+}
+public class Student11Runner {
+    public static void main(String[] args) {
+        int[] marks = {45, 55, 56, 68};
+        Student11 student1 = new Student11("mahesh", 10, marks);
+        int[] marks1 = {45, 85, 56, 75};
+        Student11 student2 = new Student11("surya", 2, marks1);
+        int[] marks2 = {45, 75, 56, 15};
+        Student11 student3 = new Student11("ajay", 13, marks2);
+        List<Student11> students= new ArrayList<>();
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
+        Collections.sort(students, Student11.comparator1);
+       // System.out.println("S1 marks:-"+student1.TotalMarks());
+       // System.out.println("S2 marks:-"+student2.TotalMarks());
+       // System.out.println("S3 marks:-"+student3.TotalMarks());
+        System.out.println(students);
+//        Collections.sort(students);
+//        System.out.println(students.toString());
+    }
+}
